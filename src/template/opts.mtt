@@ -1,0 +1,17 @@
+::foreach blocks::
+  <div class="block">
+    ::foreach blockItems::
+      <div class="item">
+        <div class="pic"><img src="::icon::"/></div>
+        <div class="title">
+          <div class="main">::title::</div>
+        </div>
+        ::if (type == 1)::
+          <i class="arrow down"></i>
+        ::else::
+          <i class="arrow right"></i>
+        ::end::
+      </div>
+    ::end::
+  </div>
+::end::

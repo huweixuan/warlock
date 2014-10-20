@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html style="width: 600px;">
+  <head>
+    
+  </head>
+  <body>
+    <canvas id="canvas" width="600px" height="700px"></canvas> 
+    <script type="text/javascript">
+      var canvas = document.getElementById('canvas');
+      var ctx = canvas.getContext('2d');
+
+      ctx.fillStyle = '#000';
+      ctx.fillRect(250, 500, 100, 100);
+      var x = 250, y = 500;
+      document.body.onkeydown = function ( e ) {
+        if(e.keyCode === 37) {
+          ctx.clearRect(x, y, 100, 100);
+          ctx.fillStyle ='#000';
+          if( x < 100) x = 100;
+          ctx.fillRect(x - 100, y, 100, 100);
+          x = x - 100;
+        }
+        if(e.keyCode === 39) {
+          ctx.clearRect(x, y, 100, 100);
+          ctx.fillStyle ='#000';
+          if(x > 400) x = 400;
+          ctx.fillRect(x + 100, y, 100, 100);
+          x = x + 100;
+        }
+      }
+
+      var block = function () {
+        var wx = Math.random() * 400, wy = 1;
+        var interval = setInterval(function () {            
+          ctx.strokeStyle = "#000";
+          ctx.strokeRect(wx + 1, wy + 100, 60, 60);
+          ctx.clearRect(wx - 1, wy - 2, 65, 65);
+          wy = wy + 100;
+          if(wy > 700) {
+            clearInterval(interval);
+            blocks.shift();
+          }
+        }, 300);
+        this.getX = function () {
+          return wx;
+        }
+        this.getY = function () {
+          return wy;
+        }
+      };
+
+      var blocks = [];
+      setInterval(function () {
+        blocks.push(new block());      
+      }, 800);
+
+      setInterval(function () {
+        for(var i = 0; i < blocks.length; i++) {
+          if(x > blocks[i].getX() - 100
+            && x < blocks[i].getX() + 60 
+            && y > blocks[i].getY() - 100
+            && y < blocks[i].getY() + 60) {
+            alert('你挂了！');
+            location.reload();
+          }
+        }
+      }, 10);
+    </script>
+  </body>
+</html>

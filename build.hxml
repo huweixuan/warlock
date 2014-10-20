@@ -1,0 +1,5 @@
+-cp src
+-js built/app.js
+-resource src/template/card.mtt@card
+-resource src/template/opts.mtt@opts
+-main App
